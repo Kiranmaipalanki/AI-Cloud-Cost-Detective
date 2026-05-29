@@ -1,25 +1,28 @@
-# Prompt 4: React Frontend + InsForge Auth
+# Prompt 4: React Frontend + Custom JWT Auth
 
-Create the React frontend in a `frontend/` folder with authentication using InsForge Auth.
+Create the React frontend in a `frontend/` folder with custom JWT authentication.
 
 ## What to build
 
 ### Setup
 
 - Use Vite + React + TypeScript.
-- Use Tailwind CSS for styling. Make the UI clean, modern, and dark-themed.
+- Use Tailwind CSS for styling. Clean, modern, dark-themed UI.
 
-### Auth (InsForge)
+### Auth (Custom JWT)
 
-- Use the InsForge MCP tool `fetch-docs` with `docType: "auth-sdk"` to read the auth docs. Follow those docs exactly.
-- Create Login and Signup pages using InsForge Auth (email/password).
-- Protect all other pages behind authentication. Redirect to login if not authenticated.
+- Add auth endpoints to the FastAPI backend:
+  - `POST /api/auth/signup` — accepts email + password, hashes password with bcrypt, stores in `users` table, returns JWT.
+  - `POST /api/auth/login` — validates credentials, returns JWT.
+- Use `PyJWT` and `bcrypt` on the backend. Store `JWT_SECRET` in `.env`.
+- On the frontend, store JWT in localStorage. Include it in all API requests via `Authorization: Bearer <token>` header.
+- Redirect to login page if not authenticated.
 
 ### Pages
 
 1. **Login / Signup** — Clean auth forms with email and password.
-2. **Dashboard** — Shows a dropdown to select an Azure Resource Group (fetched from `GET /api/resource-groups`), a "Run Analysis" button, and a progress section that shows live status updates.
-3. **Analysis Report** — Displays the AI analysis result: summary, list of issues with severity badges, estimated savings, and fix commands in copyable code blocks.
+2. **Dashboard** — Dropdown to select an Azure Resource Group (from `GET /api/resource-groups`), a "Run Analysis" button, and a progress section showing live status.
+3. **Analysis Report** — Displays the AI analysis: summary, issues with severity badges, estimated savings, and fix commands in copyable code blocks.
 4. **History** — Lists past analyses from `GET /api/history` with resource group name, date, issues found, and estimated savings. Clicking one opens the full report.
 
 ### Project structure
@@ -38,11 +41,11 @@ frontend/
 │   ├── components/
 │   │   ├── ProgressTracker.tsx
 │   │   └── Navbar.tsx
-│   └── lib/
-│       └── insforge.ts
 ├── package.json
 ├── tailwind.config.js
 ├── index.html
 ```
 
-Refer to `Architecture.MD` and `RequestFlow.MD`. This prompt covers step ① of the request flow and the UI layer.
+Update `backend/requirements.txt` — add `PyJWT`, `bcrypt`.
+
+Refer to `Architecture.MD` and `RequestFlow.MD`. This covers step ① of the request flow and the UI layer.

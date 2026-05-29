@@ -1,33 +1,31 @@
-# Prompt 5: Integrate Frontend with Backend via InsForge SDK
+# Prompt 5: Integrate Frontend with Backend (End-to-End)
 
-Connect the React frontend to the Python backend. Wire up InsForge Realtime for live progress and InsForge DB for history.
+Connect the React frontend to the FastAPI backend. Wire up WebSocket for live progress, auth for all routes, and history display.
 
 ## What to build
 
 ### API Integration
 
-- When the user clicks "Run Analysis" on the Dashboard, send a `POST /api/analyze` request to the Python backend with the selected resource group and the user's JWT token in the `Authorization` header.
-- The backend should verify the JWT before processing.
+- When the user clicks "Run Analysis", send `POST /api/analyze` with the selected resource group and JWT in the `Authorization` header.
+- On the backend, validate the JWT on all protected endpoints (`/api/analyze`, `/api/history`, `/api/resource-groups`) using a FastAPI dependency.
 
-### Realtime Progress
+### WebSocket Progress
 
-- Use the InsForge MCP tool `fetch-docs` with `docType: "real-time"` to read the realtime docs.
-- After triggering analysis, subscribe to the `analysis:<id>` realtime channel in React.
-- Display each progress message in the `ProgressTracker` component as it arrives (with a step indicator or animated list).
+- After triggering analysis, connect to `ws://localhost:8000/ws/progress/{analysis_id}` from React.
+- Display each progress message in the `ProgressTracker` component as an animated step list.
 
 ### History + Reports
 
-- The History page should fetch from `GET /api/history` using the user's JWT.
-- Clicking a past analysis should open the full Report page with all details.
+- History page fetches from `GET /api/history` with JWT.
+- Clicking a past analysis opens the Report page with full details.
 
-### Analysis Report Display
+### Report Display
 
-- Show a summary card at the top with total resources scanned, issues found, and estimated savings.
-- List each issue with: resource name, issue type (over-provisioned / unused / misconfigured), severity (high/medium/low with color badges), explanation, and a fix command in a copyable code block.
+- Summary card at the top: total resources scanned, issues found, estimated savings.
+- Each issue shows: resource name, issue type (over-provisioned / unused / misconfigured), severity badge (high = red, medium = yellow, low = green), explanation, and a fix command in a copyable code block.
 
-### Auth Guard
+### Final Testing
 
-- Add JWT token to all API requests via an Authorization header.
-- On the backend, add a middleware or dependency that validates the InsForge JWT on protected endpoints (`/api/analyze`, `/api/history`, `/api/resource-groups`).
+- Test the full flow: signup → login → select RG → run analysis → see live progress → view report → check history.
 
-Refer to `Architecture.MD` and `RequestFlow.MD`. This prompt covers the full end-to-end integration — steps ① through ⑦.
+Refer to `Architecture.MD` and `RequestFlow.MD`. This covers the full end-to-end flow — steps ① through ⑦.

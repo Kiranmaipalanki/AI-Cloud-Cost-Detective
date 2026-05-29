@@ -10,41 +10,40 @@
                            │  REACT FRONTEND   │
                            └────────┬──────────┘
                                     :
-                                    ▼
-                             ┌─────────────┐
-                             │  INSFORGE   │
-                             │    AUTH     │
-                             └──────┬──────┘
-                                    :
-                                    : JWT
+                                    : Login / Signup
                                     ▼
                            ┌───────────────────┐
                            │  PYTHON BACKEND   │
                            │    (FastAPI)      │
+                           │                   │
+                           │  · Custom JWT Auth│
                            └───┬───────┬───┬───┘
                                :       :   :
                 ┌──────────────┘       :   └──────────────┐
                 :                      :                  :
                 ▼                      ▼                  ▼
          ┌─────────────┐     ┌──────────────┐    ┌──────────────┐
-         │  AZURE CLI  │     │  INSFORGE    │    │  INSFORGE    │
-         │             │     │  REALTIME    │    │     AI       │
-         │ az resource │     │ (WebSocket)  │    │ (OpenRouter) │
-         │ list --rg   │     └──────┬───────┘    └──────┬───────┘
-         └──────┬──────┘            :                   :
-                :                   : Progress          : Analysis
+         │  AZURE CLI  │     │   FASTAPI    │    │   OPENAI     │
+         │             │     │  WEBSOCKET   │    │    API       │
+         │ az resource │     │  (Progress)  │    │              │
+         │ list --rg   │     └──────┬───────┘    │ Cost Analysis│
+         └──────┬──────┘            :            └──────┬───────┘
+                :                   : Live updates      :
                 ▼                   ▼                   :
          ┌─────────────┐   ┌───────────────┐            :
          │   AZURE     │   │    REACT      │            :
-         │ (Resource   │   │  (Live UI     │            :
-         │   Group)    │   │   Updates)    │            :
+         │ (Resource   │   │  (Progress    │            :
+         │   Group)    │   │   Tracker)    │            :
          └─────────────┘   └───────────────┘            :
                                                         ▼
-                                                 ┌─────────────┐
-                                                 │  INSFORGE   │
-                                                 │     DB      │
-                                                 │ (PostgreSQL)│
-                                                 └──────┬──────┘
+                                                 ┌──────────────┐
+                                                 │    AZURE     │
+                                                 │  POSTGRESQL  │
+                                                 │  (Managed)   │
+                                                 │              │
+                                                 │ · users      │
+                                                 │ · analyses   │
+                                                 └──────┬───────┘
                                                         :
                                                         : Stored results
                                                         ▼
