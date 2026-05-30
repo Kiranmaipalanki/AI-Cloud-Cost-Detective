@@ -160,16 +160,22 @@ FastAPI WebSocket
 
 ### How to Run
 
-#### Backend
+### Backend
+
+```bash
 cd backend
 pip install -r requirements.txt
 cp .env.example .env   # fill in your credentials
 uvicorn main:app --reload
+```
 
-#### Frontend
+### Frontend
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
 ### How It Works
 - User signs up / logs in via custom JWT auth (credentials stored in Amazon RDS PostgreSQL)
