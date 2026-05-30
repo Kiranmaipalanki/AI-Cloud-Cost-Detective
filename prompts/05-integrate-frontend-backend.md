@@ -6,8 +6,8 @@ Connect the React frontend to the FastAPI backend. Wire up WebSocket for live pr
 
 ### API Integration
 
-- When the user clicks "Run Analysis", send `POST /api/analyze` with the selected resource group and JWT in the `Authorization` header.
-- On the backend, validate the JWT on all protected endpoints (`/api/analyze`, `/api/history`, `/api/resource-groups`) using a FastAPI dependency.
+- When the user clicks "Run Analysis", send `POST /api/analyze` with the selected region and JWT in the `Authorization` header.
+- On the backend, validate the JWT on all protected endpoints (`/api/analyze`, `/api/history`, `/api/regions`) using a FastAPI dependency.
 
 ### WebSocket Progress
 
@@ -26,6 +26,6 @@ Connect the React frontend to the FastAPI backend. Wire up WebSocket for live pr
 
 ### Final Testing
 
-- Test the full flow: signup → login → select RG → run analysis → see live progress → view report → check history.
+- Test the full flow: signup → login → select region → run analysis → see live progress → view report → check history.
 
 Refer to `Architecture.MD` and `RequestFlow.MD`. This covers the full end-to-end flow — steps ① through ⑦.
