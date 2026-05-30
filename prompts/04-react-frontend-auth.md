@@ -27,7 +27,7 @@ Create the React frontend in a `frontend/` folder with custom JWT authentication
 
 ### Project structure
 
-
+```
 frontend/
 ├── src/
 │   ├── App.tsx
@@ -44,6 +44,7 @@ frontend/
 ├── package.json
 ├── tailwind.config.js
 ├── index.html
+```
 
 Update `backend/requirements.txt` — add `PyJWT`, `bcrypt`.
 
